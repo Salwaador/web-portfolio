@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radosław Łuczak - .NET Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .skills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .skill-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-chip:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: #f8f9fa;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 80px;
+            color: #764ba2;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.6s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .timeline-item:nth-child(odd) .project-card {
+            margin-right: auto;
+            margin-left: 0;
+            margin-right: calc(50% + 40px);
+        }
+
+        .timeline-item:nth-child(even) .project-card {
+            margin-left: auto;
+            margin-right: 0;
+            margin-left: calc(50% + 40px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            max-width: 550px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 5px;
+        }
+
+        .project-role {
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .project-duration {
+            background: #f0f4ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #667eea;
+            white-space: nowrap;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-height: 80px;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        .project-card.expanded .project-description {
+            max-height: 500px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tech-badge {
+            background: #e8eeff;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag.fintech {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .tag.production {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .tag.enterprise {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border: 2px solid white;
+            border-radius: 30px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .contact-link:hover {
+            background: white;
+            color: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Companies Section */
+        .companies-section {
+            background: white;
+            padding: 100px 20px;
+        }
+
+        .companies-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 30px;
+        }
+
+        .company-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            gap: 25px;
+            transition: box-shadow 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .company-card:nth-child(1) { animation-delay: 0.1s; }
+        .company-card:nth-child(2) { animation-delay: 0.2s; }
+        .company-card:nth-child(3) { animation-delay: 0.3s; }
+        .company-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .company-card:hover {
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .company-logo {
+            flex-shrink: 0;
+        }
+
+        .company-logo-img{
+            width: inherit;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .company-info {
+            flex: 1;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .company-role {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .company-period {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .calendar-icon {
+            stroke: #666;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .company-location {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .company-description {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .company-skills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .skill-tag {
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .project-card,
+            .timeline-item:nth-child(even) .project-card {
+                margin-left: 60px;
+                margin-right: 0;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-text h2 {
+                font-size: 2rem;
+            }
+
+            .skills {
+                justify-content: center;
+            }
+
+            .company-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-placeholder {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Radosław Łuczak</h1>
+            <div class="subtitle">.NET Software Engineer</div>
+            <p class="tagline">Tworzę skalowalne rozwiązania enterprise z pasją do czystego kodu i nowoczesnych technologii</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <polyline points="7 13 12 18 17 13"></polyline>
+                <polyline points="7 6 12 11 17 6"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image"><img style="border-radius: 20px;" src="https://media.licdn.com/dms/image/v2/D4D03AQEOSG1AqNwC6g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1670712202658?e=1769040000&v=beta&t=BQahAdPHzsUwRkh562Z5fyjur0Z9zsW5IKEv6OLQ51U"></div>
+                <div class="about-text">
+                    <h2>O mnie</h2>
+                    <p>
+                        Jestem doświadczonym .NET Developerem z pasją do tworzenia wydajnych i skalowalnych aplikacji. 
+                        Specjalizuję się w architekturze mikroserwisów, clean code i najnowszych technologiach .NET. 
+                        W swojej pracy stawiam na jakość, testowalność i ciągłe doskonalenie rozwiązań.
+                    </p>
+                    <p>
+                        Przez lata mojej kariery miałem okazję pracować nad różnorodnymi projektami - od systemów 
+                        finansowych po rozwiązania enterprise. Każdy projekt traktuję jako możliwość nauki i 
+                        doskonalenia swoich umiejętności. Uwielbiam rozwiązywać złożone problemy biznesowe za pomocą 
+                        eleganckich rozwiązań technicznych.
+                    </p>
+                    <div class="skills">
+                        <span class="skill-chip">C# / .NET</span>
+                        <span class="skill-chip">REST API</span>
+                        <span class="skill-chip">ASP.NET MVC</span>              
+                        <span class="skill-chip">Entity Framework</span>  
+                        <span class="skill-chip">PostgreSQL</span>     
+                        <span class="skill-chip">SQL Server</span>                 
+                        <span class="skill-chip">Docker</span>                      
+                        <span class="skill-chip">REST API</span>
+                        <span class="skill-chip">Microservices</span>
+                        <span class="skill-chip">HTML / CSS / JS</span>
+                        <span class="skill-chip">Angular</span>
+                        <span class="skill-chip">TypeScript</span>
+                        <span class="skill-chip">Clean Architecture</span>
+                        <span class="skill-chip">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Lat doświadczenia</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💼</div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Zrealizowanych projektów</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Firm w portfolio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Certyfikatów</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2 class="section-title">Doświadczenie & Projekty</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Aplikacja dla organizacji publicznej</div>
+                            <div class="project-role">Backend Developer / Software Engineer</div>
+                        </div>
+                        <div class="project-duration"> > 6 msc</div>
+                    </div>
+                    <div class="project-description">
+                        Realizacja projektu greenfield polegającego na stworzeniu systemu backendowego dla aplikacji mobilnej wspierającej procesy
+                        organizacyjne jednej z większych organizacji branżowych.
+                        Odpowiedzialność obejmowała zebranie wymagań, zaprojektowanie
+                        architektury oraz implementację backendu w duchu DDD. Projekt
+                        obejmował integracje z API klienta oraz Firebase (powiadomienia push), zapewniając skalowalność i stabilność systemu.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET 8</span>
+                        <span class="tech-badge">Entity Framework</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Sektor publiczny</span>
+                        <span class="tag production">Organizacja krajowa</span>
+                        <span class="tag production">CMS</span>
+                        <span class="tag production">Mobile</span>
+                        <span class="tag production">WEB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Aplikacja lifestyle'owa dla rodziców</div>
+                            <div class="project-role">Backend Developer / Software Engineer</div>
+                        </div>
+                        <div class="project-duration">1 rok</div>
+                    </div>
+                    <div class="project-description">
+                        Realizacja projektu greenfield polegającego na stworzeniu systemu backendowego dla aplikacji mobilnej wspierającej rodziców w wyszukiwaniu atrakcji dla dzieci w okolicy.
+                        Odpowiedzialność obejmowała zaprojektowanie architektury systemu, zebranie wymagań biznesowych podczas sesji event storming, implementację w duchu DDD oraz integracje z
+                        zewnętrznymi usługami, w tym bramką płatności Przelewy24, Google API, Firebase oraz systemem powiadomień push. Projekt obejmował również zaprojektowanie systemu
+                        subskrypcyjnego oraz zapewnienie skalowalności i stabilności rozwiązania.
+
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET 8</span>
+                        <span class="tech-badge">Entity Framework</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag enterprise">Subskrypcje</span>
+                        <span class="tag production">Płatności</span>
+                        <span class="tag production">Geolokalizacja</span>
+                        <span class="tag production">Mobile</span>
+                        <span class="tag production">WEB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">System dla firmy ochroniarskiej</div>
+                            <div class="project-role">Backend Developer / Software Engineer</div>
+                        </div>
+                        <div class="project-duration">3 msc</div>
+                    </div>
+                    <div class="project-description">
+                        Realizacja projektu polegającego na kompleksowym przepisaniu systemu od podstaw dla jednej z większych firm z branży ochrony obiektów.
+                        Prace obejmowały analizę istniejącego rozwiązania, zebranie i doprecyzowanie wymagań biznesowych oraz zaprojektowanie nowej architektury backendowej.
+                        Implementacja nowego systemu backendowego eliminującego ograniczenia pierwotnego rozwiązania oraz uwzględniającego nowe potrzeby biznesowe, z naciskiem na stabilność, wydajność i możliwość dalszego rozwoju.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET 8</span>
+                        <span class="tech-badge">Entity Framework</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Ochrona</span>
+                        <span class="tag enterprise">Zarządzanie pracownikami</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Integracja z platformą antyfraudową BIK dla firmy faktoringowej</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 1 rok</div>
+                    </div>
+                    <div class="project-description">
+                        Praca przy projektach realizowanych dla jednej z największych firm faktoringowych w Polsce.
+                        Odpowiedzialność za utrzymanie oraz rozwój systemów wspierających realizację kluczowych procesów faktoringowych.
+                        Udział w przeprowadzeniu pełnej integracji głównego systemu Klienta z platformą antyfraudową BIK — jednej z pierwszych tego typu integracji wdrożonych na rynku polskim.
+                        Realizacja dedykowanego systemu od podstaw, którego celem było usprawnienie przetwarzania archiwalnych danych Klienta przez platformę antyfraudową.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Framework</span>
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Blazor WebAssembly</span>
+                        <span class="tech-badge">WCF</span>
+                        <span class="tech-badge">HTML / CSS / JS</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Fintech</span>
+                        <span class="tag fintech">Integracje</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Rozwój oraz utrzymanie systemów jednego z czołowych producentów materaców piankowych dla sieci sklepów IKEA</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 1 rok</div>
+                    </div>
+                    <div class="project-description">
+                       Praca przy kilku projektach realizowanych dla firmy produkującej materace dla IKEA.
+                       Odpowiedzialność za rozwój oraz utrzymanie systemów wspierających kluczowe obszary działalności firmy,
+                       w tym produkcję, logistykę oraz pracę biurową. Aktywny udział w analizie wymagań, konsultacjach z
+                       interesariuszami biznesowymi oraz przekładaniu potrzeb biznesowych na rozwiązania techniczne.
+                       Współpraca z zespołami technicznymi i biznesowymi w celu zapewnienia stabilności oraz dalszego rozwoju systemów.
+
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Framework</span>
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">ASP.NET MVC</span>
+                        <span class="tech-badge">Enity Framework</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">HTML / CSS / JS</span>
+                        <span class="tech-badge">Angular</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Produkcja</span>
+                        <span class="tag fintech">Logistyka</span>
+                        <span class="tag fintech">Magazyny</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Platforma do zamawiania jedzenia dla uczniów</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 3 msc</div>
+                    </div>
+                    <div class="project-description">
+                      Udział w rozwoju oraz utrzymaniu działającej platformy do zamawiania jedzenia dla uczniów szkół,
+                      obejmującej aplikację webową oraz mobilną. Praca nad implementacją nowych funkcjonalności, rozwojem API
+                      oraz zapewnieniem stabilności i skalowalności systemu obsługującego procesy zamówień.
+                      Współpraca przy rozwoju rozwiązań backendowych i frontendowych w środowisku konteneryzowanym
+
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">Enity Framework</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">Ionic</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Catering</span>
+                        <span class="tag fintech">Płatności</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">System dla szkoły nauki jazdy</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 3 msc</div>
+                    </div>
+                    <div class="project-description">
+                      Udział w rozwoju platformy dedykowanej szkole nauki jazdy.
+                      Odpowiedzialność za naprawę kluczowych funkcjonalności po wcześniejszych implementacjach,
+                      optymalizację wydajności aplikacji oraz usprawnienia w warstwie frontendowej.
+                      Prace ukierunkowane na poprawę stabilności systemu, jakości kodu oraz doświadczenia użytkowników.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">Enity Framework</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Edukcja</span>
+                        <span class="tag fintech">Płatności</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Platforma do zamawiania cateringu biurowego</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 6 msc</div>
+                    </div>
+                    <div class="project-description">
+                     Udział w utrzymaniu, rozwoju oraz wsparciu backendowym jednej z większych platform do zamawiania cateringu biurowego.
+                     Odpowiedzialność za rozwój API oraz integrację systemu z bramką płatności Przelewy24, zapewniającą bezpieczną i niezawodną obsługę transakcji.
+                     Praca w środowisku konteneryzowanym z naciskiem na stabilność, wydajność oraz 
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">Enity Framework</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Catering</span>
+                        <span class="tag fintech">Płatności</span>
+                        <span class="tag fintech">Integracje</span>
+                        <span class="tag fintech">Mobile</span>
+                        <span class="tag fintech">WEB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Aplikacja dla osób grających w gry planszowe</div>
+                            <div class="project-role">Backend Developer / Full-Stack Developer</div>
+                        </div>
+                        <div class="project-duration"> > 6 msc</div>
+                    </div>
+                    <div class="project-description">
+                     Praca nad rozwojem oraz poprawą kluczowych funkcjonalności backendowych aplikacji mobilnej
+                     dedykowanej osobom zainteresowanym wspólnym graniem w gry planszowe. Odpowiedzialność za refaktoryzację i
+                     stabilizację rozwiązań po wcześniejszych implementacjach oraz realizację drobnych prac rozwojowych w panelu
+                     webowym administratora. Wykonanie integracji z API OpenAI (ChatGPT) w celu rozszerzenia funkcjonalności aplikacji.
+
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">.NET Core</span>
+                        <span class="tech-badge">Enity Framework</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Refactoring</span>
+                        <span class="tag fintech">AI</span>
+                        <span class="tag fintech">Integracje</span>
+                        <span class="tag fintech">Mobile</span>
+                        <span class="tag fintech">WEB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Aplikacja wspierająca proces zbioru owoców na dużych farmach</div>
+                            <div class="project-role">Mobile Application Developer</div>
+                        </div>
+                        <div class="project-duration"> 1 msc</div>
+                    </div>
+                    <div class="project-description">
+                        Udział w rozwoju aplikacji mobilnej wspierającej procesy zbioru owoców na dużych farmach
+                        w Wielkiej Brytanii. Aplikacja wykorzystywana przez pracowników terenowych do usprawnienia
+                        organizacji pracy oraz raportowania działań operacyjnych. Odpowiedzialność za implementację nowych
+                        funkcjonalności oraz rozwój interfejsu użytkownika w oparciu o wymagania biznesowe
+
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">Ionic</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Rolnictwo</span>
+                        <span class="tag fintech">Mobile</span>
+                    </div>
+                </div>
+            </div>
+
+             <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Aplikacja instytucji państwowej</div>
+                            <div class="project-role">Software Developer</div>
+                        </div>
+                        <div class="project-duration"> 1 msc</div>
+                    </div>
+                    <div class="project-description">
+                        Prace nad rozwojem i poprawą funkcjonalności aplikacji mobilnej opartej na Microsoft Power Platform,
+                        wykorzystywanej przez instytucję państwową do wsparcia kluczowych procesów operacyjnych. Odpowiedzialność
+                        za usuwanie błędów, usprawnianie wydajności oraz dostosowywanie systemu do bieżących potrzeb użytkowników.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Microsoft Power Platform</span>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag fintech">Low Code</span>
+                        <span class="tag fintech">Power Platform</span>
+                        <span class="tag fintech">Instytucja państwowa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="companies-section">
+        <div class="container">
+            <h2 class="section-title">Firmy w których pracowałem</h2>
+            <div class="companies-grid">            
+
+                <div class="company-card">
+                    <div class="company-logo">
+                        <div class="logo-placeholder">
+                            <img class="company-logo-img" src="https://media.licdn.com/dms/image/v2/D4D0BAQEzi-6ENwL3Lw/company-logo_200_200/company-logo_200_200/0/1683709032666/devqube_logo?e=1769040000&v=beta&t=uuidJIrbvLitA94l6AZYB5i-iJR_uxCeOVQKLhudxhI" alt="devqube">
+                        </div>
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Devqube</h3>
+                        <div class="company-role">
+                            Software Engineer / Backend–Full-Stack Developer
+                        </div>
+                        <div class="company-period">
+                            <svg class="calendar-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Paź 2021 - obecnie · 4 lata 4 mies.
+                        </div>
+                         <div class="company-location">Wrocław, Polska · Zdalnie</div>
+                        <p class="company-description">
+                            Praca przy realizacji wielu projektów dla klientów z różnych branż, w tym finansowej, produkcyjnej, logistycznej, edukacyjnej oraz sektora publicznego.
+                            Odpowiedzialność za projektowanie, rozwój i utrzymanie systemów backendowych oraz aplikacji webowych i mobilnych, zarówno w projektach greenfield, jak i przy modernizacji istniejących rozwiązań.
+                            Aktywny udział w analizie wymagań biznesowych, projektowaniu architektury, integracjach z systemami zewnętrznymi oraz dostarczaniu skalowalnych i stabilnych rozwiązań w nowoczesnym stosie technologicznym.
+                        </p>
+                        <div class="company-skills">
+                              <span class="skill-tag">.NET Framework</span>
+                            <span class="skill-tag">.NET Core</span>
+                            <span class="skill-tag">.NET 5-10</span>
+                            <span class="skill-tag">Entity Framework</span>
+                            <span class="skill-tag">ASP.NET MVC</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">HTML, CSS, JS, jQuery</span>
+                            <span class="skill-tag">Razor Pages</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">Ionic</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Azure Devops</span>
+                            <span class="skill-tag">Jira</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-logo">
+                        <div class="logo-placeholder">
+                            <img class="company-logo-img" src="https://media.licdn.com/dms/image/v2/C4E0BAQGtsQQHCK642Q/company-logo_200_200/company-logo_200_200/0/1639403924751/argip_sp_z_o_o_logo?e=1769040000&v=beta&t=ANDqkrMDvCo_fvi_-uq_NUc7Vz8bQWzwwpSk6OkTjso" alt="argip">
+                        </div>
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Argip sp. z o.o.</h3>
+                        <div class="company-role">Software Engineer / Backend–Full-Stack Developer</div>
+                        <div class="company-period">
+                            <svg class="calendar-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Maj 2020 - Wrz 2021 · 1 rok 5 mies.
+                        </div>
+                        <div class="company-location">Poznań, Polska · Stacjonarnie</div>
+                        <p class="company-description">
+                            Rozwój i utrzymanie wewnętrznej aplikacji Business Intelligence opartej o ASP.NET MVC.
+                            Integracja systemów wewnętrznych z oprogramowaniem zewnętrznych dostawców. Udział w migracji aplikacji legacy do nowego modułu systemu, obejmujący analizę potrzeb biznesowych oraz projektowanie i implementację architektury, baz danych, logiki biznesowej i warstwy front-endowej.
+                            Rozwój jednego z mikroserwisów w architekturze rozproszonej.
+                        </p>
+                        <div class="company-skills">
+                            <span class="skill-tag">.NET Framework</span>
+                            <span class="skill-tag">.NET Core</span>
+                            <span class="skill-tag">Entity Framework</span>
+                            <span class="skill-tag">ASP.NET MVC</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">HTML, CSS, JS, jQuery</span>
+                            <span class="skill-tag">Razor Pages</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Azure Devops</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="company-card">
+                    <div class="company-logo">
+                        <div class="logo-placeholder">
+                            <img class="company-logo-img" src="https://media.licdn.com/dms/image/v2/C560BAQHR18F881dC-A/company-logo_200_200/company-logo_200_200/0/1631352345267?e=1769040000&v=beta&t=oRh2XtNOxuANXRKxzVXITwJWfz6ZMnngZHg-EWu1BWU" alt="thinq">
+                        </div>
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">THINQ Development</h3>
+                        <div class="company-role">Junior .NET / WEB Developer</div>
+                        <div class="company-period">
+                            <svg class="calendar-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Maj 2019 - Kwi 2020 · 1 rok
+                        </div>
+                        <div class="company-location">Poznań, Polska · Stacjonarnie</div>
+                        <p class="company-description">
+                            Rozwijanie oraz utrzymywanie aplikacji webowych opartych o ASP.NET MVC oraz Web Forms.
+                            Tworzenie responsywnych stron internetowych oraz landing pages.
+                            Zarządzanie stronami opartych o WordPress.
+                        </p>
+                        <div class="company-skills">
+                            <span class="skill-tag">.NET Framework</span>
+                            <span class="skill-tag">ASP.NET MVC</span>
+                            <span class="skill-tag">ASP.NET Web Forms</span>
+                            <span class="skill-tag">Entity Framework</span>
+                            <span class="skill-tag">Microsoft SQL Server</span>
+                            <span class="skill-tag">HTML, CSS, JS, jQuery</span>
+                            <span class="skill-tag">TFS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>Skontaktuj się ze mną</h2>
+            <div class="contact-links">
+                <a href="https://github.com/twoj-username" class="contact-link" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/twoj-profil" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="mailto:twoj@email.com" class="contact-link">Email</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Expand project cards on click
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+        });
+
+        // Intersection Observer for timeline animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Stats counter animation
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        let current = 0;
+
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.textContent = Math.floor(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+
+                        updateCounter();
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
